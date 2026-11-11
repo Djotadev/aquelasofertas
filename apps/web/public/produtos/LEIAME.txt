@@ -1,0 +1,4 @@
+Coloque aqui as fotos dos produtos do Top 7, com o nome do código do item e extensão .jpg.
+Exemplo: nb-aspire-5.jpg, cel-galaxy-a57.jpg, su-creatina.jpg
+Os códigos estão nos arquivos top-tecnologia.json, top-fitness.json e top-casa.json (campo "slug").
+Use apenas fotos suas ou com licença de uso. Sem foto, o artigo mostra um cartão ilustrado.
