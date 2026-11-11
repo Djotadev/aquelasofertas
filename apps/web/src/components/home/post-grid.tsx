@@ -1,0 +1,10 @@
+import { useState } from 'react';
+import { Link } from 'react-router';
+import { ArrowUpRight, BookOpen, Clock3, Grid2X2, Laptop, Dumbbell, House } from 'lucide-react';
+import { posts, imageUrl } from '@/lib/posts';
+const categories = [{name:'Todos',icon:Grid2X2},{name:'Tecnologia',icon:Laptop},{name:'Fitness',icon:Dumbbell},{name:'Casa',icon:House}];
+export function PostGrid({ category }: { category?: string }) {
+ const [selected, setSelected] = useState(category || 'Todos');
+ const filtered = posts.filter(p => selected === 'Todos' || p.category === selected);
+ return <section id="posts" className="offers-section"><div className="section-heading"><div><div className="eyebrow blue"><BookOpen size={15}/> ARTIGOS E GUIAS</div><h2>{category ? `Artigos de ${category.toLowerCase()}` : 'Últimos artigos'}<span className="heading-dot">.</span></h2><p>Conteúdo para decidir melhor antes de comprar.</p></div></div>{!category && <div className="filter-row"><div className="filters" aria-label="Filtrar artigos">{categories.map(({name,icon:Icon})=><button key={name} onClick={()=>setSelected(name)} aria-pressed={selected===name} className={selected===name?'selected':''}><Icon size={16}/>{name}</button>)}</div><span>{filtered.length} artigos</span></div>}<div className="offer-grid post-grid" key={selected}>{filtered.map((post,index)=><article className="offer-card" key={post.slug} style={{animationDelay:`${Math.min(index,5)*35}ms`}}><Link to={`/blog/${post.slug}`} className="product-image"><img src={imageUrl(post.image)} alt={post.alt} width="1024" height="1024" loading="lazy"/><span className="image-category">{post.category}</span></Link><div className="product-content"><div className="store"><Clock3 size={11}/>{post.minutes} min de leitura<span>{post.date}</span></div><h3><Link to={`/blog/${post.slug}`}>{post.title}</Link></h3><p className="post-excerpt">{post.excerpt}</p><Link className="offer-button" to={`/blog/${post.slug}`}>Ler artigo <ArrowUpRight size={17}/></Link></div></article>)}</div></section>;
+}

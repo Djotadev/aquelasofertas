@@ -1,0 +1,10 @@
+import data from '@/data/posts.json';
+export type Block = { type: 'p' | 'h2' | 'cta' | 'product' | 'toplist'; text?: string; id?: string };
+export type Post = { slug: string; category: string; title: string; excerpt: string; date: string; isoDate: string; minutes: number; image: string; alt: string; body: Block[] };
+export const posts = data.posts as Post[];
+export const updatedAt = data.updatedAt;
+export const affiliateUrl = data.affiliateUrl;
+export const siteName = 'Aquelas Orfetas';
+export const imageUrl = (id: string) => `https://images.hostinger.com/0833e13f-d749-4a4b-a8ea-d52c2b786965/${id}.png`;
+export const findPost = (slug?: string) => posts.find(p => p.slug === slug);
+export const disclosure = 'Alguns links são de afiliados. Podemos receber comissão sem custo adicional para você.';

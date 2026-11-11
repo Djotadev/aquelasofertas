@@ -1,0 +1,462 @@
+{
+ "updated": "outubro de 2026",
+ "categories": [
+  {
+   "id": "tenis",
+   "label": "Tênis",
+   "intro": "Modelos de corrida e treino que aparecem com frequência nos guias brasileiros, do mais básico ao mais confortável. Os modelos mudam de versão todo ano, então a versão anterior em promoção costuma ser um bom negócio. Escolha pelo uso e pelo conforto no pé, e não só pelo preço.",
+   "items": [
+    {
+     "slug": "tn-olympikus-challenger-5",
+     "name": "Olympikus Challenger 5",
+     "badge": "Melhor para começar",
+     "summary": "Tênis nacional indicado a quem está começando e corre distâncias curtas, de até uns 5 km.",
+     "pros": [
+      "Recomendado por guias para iniciantes",
+      "Numeração ampla, do 34 ao 44",
+      "Preço de entrada entre os de corrida"
+     ],
+     "cons": [
+      "Sem tecnologias de alta performance",
+      "Confira a versão atual no anúncio"
+     ],
+     "query": "olympikus challenger 5"
+    },
+    {
+     "slug": "tn-olympikus-corre-4",
+     "name": "Olympikus Corre 4",
+     "badge": "Segundo par para treinos rápidos",
+     "summary": "Leve e barato, funciona bem como par extra para treinos mais velozes.",
+     "pros": [
+      "Leve, bom para ritmo mais forte",
+      "Tecnologia nacional com preço competitivo"
+     ],
+     "cons": [
+      "Melhor como segundo par do que como único tênis para muita quilometragem"
+     ],
+     "query": "olympikus corre 4"
+    },
+    {
+     "slug": "tn-adidas-duramo-sl-2",
+     "name": "adidas Duramo SL 2",
+     "badge": "Marca internacional de entrada",
+     "summary": "Indicado em guias para iniciantes, bom para quem quer uma marca global sem pagar caro.",
+     "pros": [
+      "Recomendado para quem está começando",
+      "Fácil de achar em vários tamanhos"
+     ],
+     "cons": [
+      "Não é um tênis de alta performance",
+      "A numeração varia entre marcas, confira a tabela"
+     ],
+     "query": "adidas duramo sl 2"
+    },
+    {
+     "slug": "tn-asics-gel-excite-10",
+     "name": "ASICS Gel-Excite 10",
+     "badge": "Iniciante com marca de corrida",
+     "summary": "Modelo para pisada neutra, conhecido pela durabilidade da marca.",
+     "pros": [
+      "Pisada neutra, com drop de 8 mm",
+      "Fama de durável",
+      "Bom para a rotina de treinos"
+     ],
+     "cons": [
+      "Um pouco mais pesado que os Olympikus",
+      "Confira se a versão está em oferta"
+     ],
+     "query": "asics gel excite 10"
+    },
+    {
+     "slug": "tn-nike-revolution",
+     "name": "Nike Revolution",
+     "badge": "Caminhada e corrida leve",
+     "summary": "Tênis econômico e respirável, para caminhadas e corridas leves.",
+     "pros": [
+      "Leve e respirável",
+      "Preço baixo para uma marca grande"
+     ],
+     "cons": [
+      "Não é indicado para treinos mais intensos",
+      "Acabamento simples"
+     ],
+     "query": "nike revolution corrida"
+    },
+    {
+     "slug": "tn-asics-gel-cumulus",
+     "name": "ASICS Gel-Cumulus",
+     "badge": "Conforto para rodar mais",
+     "summary": "Versátil, atende de caminhadas a corridas de média distância, e fica entre custo-benefício e conforto.",
+     "pros": [
+      "Bom amortecimento para treinos mais longos",
+      "Serve para caminhar e correr"
+     ],
+     "cons": [
+      "Mais caro que os modelos de entrada",
+      "Vale procurar a versão anterior em promoção"
+     ],
+     "query": "asics gel cumulus"
+    },
+    {
+     "slug": "tn-asics-gel-venture",
+     "name": "ASICS Gel-Venture",
+     "badge": "Para trilha",
+     "summary": "Opção de bom custo-benefício para quem corre em terra, trilha e piso irregular.",
+     "pros": [
+      "Feito para trilhas leves",
+      "Boa relação custo-benefício"
+     ],
+     "cons": [
+      "O solado de trilha é desnecessário para asfalto"
+     ],
+     "query": "asics gel venture"
+    }
+   ]
+  },
+  {
+   "id": "roupas-academia",
+   "label": "Roupas de academia",
+   "intro": "Aqui a ideia é saber o que procurar em cada peça e já ir direto para as ofertas. Dê preferência a tecidos que secam rápido e respiram, e confira sempre a tabela de medidas da marca.",
+   "items": [
+    {
+     "slug": "ra-camiseta-dry-fit",
+     "name": "Camiseta dry-fit",
+     "badge": "Básico do treino",
+     "summary": "Tecido leve que seca rápido, melhor que algodão grosso para quem transpira muito.",
+     "pros": [
+      "Seca rápido e respira",
+      "Leve e confortável",
+      "Fácil de achar em promoção"
+     ],
+     "cons": [
+      "Sintéticos podem reter odor, lave logo após o treino"
+     ],
+     "query": "camiseta dry fit academia"
+    },
+    {
+     "slug": "ra-regata-treino",
+     "name": "Regata de treino",
+     "badge": "Mais liberdade nos ombros",
+     "summary": "Boa para treinos de costas e ombros, com mais ventilação.",
+     "pros": [
+      "Liberdade total de movimento",
+      "Mais fresca em dia quente"
+     ],
+     "cons": [
+      "Cavas muito largas podem incomodar em alguns exercícios"
+     ],
+     "query": "regata treino academia"
+    },
+    {
+     "slug": "ra-bermuda-treino",
+     "name": "Bermuda ou short de treino",
+     "badge": "Agachar sem preocupação",
+     "summary": "Procure cintura firme, cordão e, se possível, bolso com zíper para o celular e a chave.",
+     "pros": [
+      "Elástico firme e cordão de ajuste",
+      "Bolso com zíper em muitos modelos"
+     ],
+     "cons": [
+      "Comprimentos variam, confira a medida"
+     ],
+     "query": "bermuda treino academia masculina"
+    },
+    {
+     "slug": "ra-legging-compressao",
+     "name": "Legging ou calça de compressão",
+     "badge": "Conforto e sustentação",
+     "summary": "Cintura alta e tecido opaco fazem diferença. Faça o teste do agachamento: a peça não deve ficar transparente.",
+     "pros": [
+      "Cintura alta e boa sustentação",
+      "Costuras planas incomodam menos"
+     ],
+     "cons": [
+      "Tecido fino pode ficar transparente",
+      "A numeração varia entre marcas"
+     ],
+     "query": "legging academia cintura alta"
+    },
+    {
+     "slug": "ra-top-esportivo",
+     "name": "Top esportivo",
+     "badge": "Sustentação certa para o treino",
+     "summary": "Escolha pelo nível de impacto: baixo, médio ou alto. Confira alças, fechamento e acabamento.",
+     "pros": [
+      "Há modelos para cada nível de impacto",
+      "Opções com bojo removível"
+     ],
+     "cons": [
+      "Tamanho errado desconforta e perde a sustentação"
+     ],
+     "query": "top esportivo academia sustentação"
+    },
+    {
+     "slug": "ra-jaqueta-moletom",
+     "name": "Jaqueta ou moletom leve",
+     "badge": "Aquecimento e ar-condicionado",
+     "summary": "Boa para chegar e sair da academia, e para aquecer antes do treino em dias frios.",
+     "pros": [
+      "Vale para o treino e para o dia a dia",
+      "Costuma ter bom desconto"
+     ],
+     "cons": [
+      "Escolha tecido que não pese no calor"
+     ],
+     "query": "jaqueta moletom treino leve"
+    },
+    {
+     "slug": "ra-meias-esportivas",
+     "name": "Meias esportivas",
+     "badge": "Evita bolhas",
+     "summary": "Prefira meias sem costura aparente e com reforço, em tecido que respira.",
+     "pros": [
+      "Mais conforto e menos atrito",
+      "Vendidas em kit com bom preço"
+     ],
+     "cons": [
+      "Meia de algodão comum pode reter suor"
+     ],
+     "query": "kit meia esportiva"
+    }
+   ]
+  },
+  {
+   "id": "roupas-corrida",
+   "label": "Roupas de corrida",
+   "intro": "Roupa de corrida precisa ser leve, secar rápido e não machucar com o atrito. Costuras planas e tecidos com proteção UV ajudam bastante.",
+   "items": [
+    {
+     "slug": "rc-camiseta-uv",
+     "name": "Camiseta com proteção UV",
+     "badge": "Para treinar ao sol",
+     "summary": "Tecido leve e ventilado, com proteção solar na própria roupa.",
+     "pros": [
+      "Proteção UV na peça",
+      "Seca rápido",
+      "Leve e respirável"
+     ],
+     "cons": [
+      "Proteção solar não dispensa protetor na pele exposta"
+     ],
+     "query": "camiseta corrida proteção uv"
+    },
+    {
+     "slug": "rc-short-forro",
+     "name": "Short de corrida com forro",
+     "badge": "Evita assadura",
+     "summary": "O forro interno reduz o atrito nas coxas em treinos mais longos.",
+     "pros": [
+      "Forro que ajuda contra atrito",
+      "Leve e com cós confortável"
+     ],
+     "cons": [
+      "Confira o tamanho do forro e do cós"
+     ],
+     "query": "short corrida com forro interno"
+    },
+    {
+     "slug": "rc-calca-corrida",
+     "name": "Calça ou legging de corrida",
+     "badge": "Para dias frios e treinos longos",
+     "summary": "Ajustada ao corpo, não atrapalha a passada e segura a musculatura.",
+     "pros": [
+      "Boa mobilidade na passada",
+      "Costuras planas"
+     ],
+     "cons": [
+      "Em dias muito quentes pode ser quente demais"
+     ],
+     "query": "calça legging corrida"
+    },
+    {
+     "slug": "rc-top-corrida",
+     "name": "Top ou sutiã de corrida",
+     "badge": "Sustentação alta",
+     "summary": "Corrida é exercício de alto impacto, então a sustentação deve ser alta.",
+     "pros": [
+      "Mais conforto durante o impacto",
+      "Modelos com alças ajustáveis"
+     ],
+     "cons": [
+      "Tamanho errado desconforta, experimente antes se possível"
+     ],
+     "query": "top corrida alta sustentação"
+    },
+    {
+     "slug": "rc-jaqueta-corta-vento",
+     "name": "Jaqueta corta-vento",
+     "badge": "Leve e dobrável",
+     "summary": "Protege do vento e de garoa e cabe na pochete ou na mochila.",
+     "pros": [
+      "Leve e fácil de levar",
+      "Boa para treinos de manhã cedo"
+     ],
+     "cons": [
+      "Pode esquentar se não tiver ventilação"
+     ],
+     "query": "jaqueta corta vento corrida"
+    },
+    {
+     "slug": "rc-meia-corrida",
+     "name": "Meia de corrida",
+     "badge": "Menos bolhas",
+     "summary": "Meia sem costura e com reforço no calcanhar reduz bolhas em treinos longos.",
+     "pros": [
+      "Reforço no calcanhar e no dedão",
+      "Tecido que seca rápido"
+     ],
+     "cons": [
+      "Escolha o tamanho certo para não enrugar dentro do tênis"
+     ],
+     "query": "meia corrida sem costura"
+    },
+    {
+     "slug": "rc-bone-viseira",
+     "name": "Boné ou viseira",
+     "badge": "Contra o sol",
+     "summary": "Leves e respiráveis, ajudam a manter o suor longe dos olhos.",
+     "pros": [
+      "Leve e fácil de lavar",
+      "Boa proteção do rosto"
+     ],
+     "cons": [
+      "Escolha tecido leve, que não esquente a cabeça"
+     ],
+     "query": "boné viseira corrida"
+    }
+   ]
+  },
+  {
+   "id": "suplementos",
+   "label": "Suplementos e alimentos",
+   "intro": "Compare pelo custo por dose de proteína e pela lista de ingredientes, e não só pelo preço do pote. Suplemento não substitui comida de verdade: converse com um nutricionista ou médico antes de começar, sobretudo se você está grávida ou amamentando, tem doença renal, usa remédios ou tem menos de 18 anos. Confira o registro ou a notificação na Anvisa no rótulo.",
+   "items": [
+    {
+     "slug": "su-whey-concentrado",
+     "name": "Whey protein concentrado",
+     "badge": "Melhor custo por dose",
+     "summary": "Costuma ter o menor custo por grama de proteína e atende bem a maioria das pessoas.",
+     "pros": [
+      "Bom custo por dose",
+      "Boa fonte de proteína para o dia a dia",
+      "Muitos sabores"
+     ],
+     "cons": [
+      "Tem mais lactose e gordura que o isolado",
+      "A proteína por dose varia, compare por 100 g"
+     ],
+     "query": "whey protein concentrado 900g",
+     "examples": [
+      "Growth Supplements",
+      "Max Titanium",
+      "Integralmédica 100% Pure",
+      "Dux Nutrition"
+     ]
+    },
+    {
+     "slug": "su-whey-isolado",
+     "name": "Whey protein isolado",
+     "badge": "Mais puro, com menos lactose",
+     "summary": "Para quem tem sensibilidade à lactose ou quer menos gordura e carboidrato por dose.",
+     "pros": [
+      "Mais proteína por dose",
+      "Menos lactose e gordura"
+     ],
+     "cons": [
+      "Mais caro por dose",
+      "Se a lactose não incomoda, o concentrado resolve"
+     ],
+     "query": "whey protein isolado 900g",
+     "examples": [
+      "BodyAction Isolate Definition",
+      "Max Titanium",
+      "Integralmédica",
+      "Dux Nutrition"
+     ]
+    },
+    {
+     "slug": "su-creatina",
+     "name": "Creatina monohidratada",
+     "badge": "A mais estudada",
+     "summary": "É a forma mais estudada e costuma ter o melhor custo-benefício. A dose usual é de 3 a 5 g por dia, conforme o rótulo e a orientação profissional.",
+     "pros": [
+      "Forma mais estudada, com boa evidência",
+      "Rende meses por pote",
+      "Barata para o tempo de uso"
+     ],
+     "cons": [
+      "Pode causar retenção de líquidos em algumas pessoas",
+      "Prefira 100% pura, sem mistura com açúcar ou maltodextrina"
+     ],
+     "query": "creatina monohidratada 300g",
+     "examples": [
+      "Growth Supplements",
+      "Max Titanium",
+      "Integralmédica Hardcore",
+      "Soldiers Nutrition",
+      "Dux Nutrition"
+     ]
+    },
+    {
+     "slug": "su-pasta-amendoim",
+     "name": "Pasta de amendoim",
+     "badge": "Gordura boa e energia",
+     "summary": "Comida de verdade e prática para café da manhã e lanches.",
+     "pros": [
+      "Boa fonte de energia e proteína vegetal",
+      "Ingrediente simples nas versões puras"
+     ],
+     "cons": [
+      "Calórica, atenção à porção",
+      "Escolha a que tem só amendoim, sem açúcar ou óleo adicionado"
+     ],
+     "query": "pasta de amendoim integral 1kg"
+    },
+    {
+     "slug": "su-barra-proteina",
+     "name": "Barra de proteína",
+     "badge": "Lanche prático",
+     "summary": "Boa para o pós-treino quando você não tem como preparar nada.",
+     "pros": [
+      "Prática e fácil de levar",
+      "Boa quantidade de proteína por unidade"
+     ],
+     "cons": [
+      "Algumas têm muito açúcar",
+      "Compare gramas de proteína e açúcar no rótulo"
+     ],
+     "query": "barra de proteína caixa"
+    },
+    {
+     "slug": "su-albumina",
+     "name": "Albumina",
+     "badge": "Proteína do ovo, econômica",
+     "summary": "Alternativa de proteína barata e sem lactose.",
+     "pros": [
+      "Custo baixo",
+      "Sem lactose"
+     ],
+     "cons": [
+      "Sabor e textura menos agradáveis",
+      "Não serve para quem tem alergia a ovo"
+     ],
+     "query": "albumina 500g"
+    },
+    {
+     "slug": "su-aveia",
+     "name": "Aveia em flocos",
+     "badge": "Carboidrato barato",
+     "summary": "Fonte barata de carboidrato e fibras, boa antes do treino e no café da manhã.",
+     "pros": [
+      "Barata e versátil",
+      "Tem fibras"
+     ],
+     "cons": [
+      "Pode ter contaminação com glúten, atenção se você é celíaco"
+     ],
+     "query": "aveia em flocos 500g"
+    }
+   ]
+  }
+ ]
+}

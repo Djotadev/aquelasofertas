@@ -1,0 +1,7 @@
+import { ArrowDown, ArrowUpRight, BookOpen, BadgeCheck } from 'lucide-react';
+import { Link } from 'react-router';
+import { imageUrl, posts } from '@/lib/posts';
+export function Hero() {
+ const post = posts[0];
+ return <section className="hero"><div className="hero-orbit" aria-hidden="true"/><div className="hero-copy"><div className="eyebrow"><span/> BLOG DE GUIAS E ACHADOS</div><h1>Compre melhor.<br/>Gaste <span>menos.</span></h1><p>Guias de tecnologia, fitness e casa para você escolher com segurança.<br className="desktop-break"/> A gente explica. Você decide.</p><div className="hero-actions"><a href="#posts" className="primary-button">Ler os artigos <ArrowDown size={17}/></a><a href="/go/mercadolivre" target="_blank" rel="sponsored noopener" className="ghost-button">Ver no Mercado Livre <ArrowUpRight size={16}/></a></div><div className="hero-proof"><span><BookOpen size={16}/> Conteúdo original</span><span><BadgeCheck size={16}/> Links sinalizados</span></div></div><div className="hero-exhibit"><div className="exhibit-caption"><span>ÚLTIMO ARTIGO</span><span>{post.date}</span></div><img src={imageUrl(post.image)} width="1024" height="1024" alt={post.alt} fetchPriority="high"/><div className="exhibit-price"><div><span>{post.category}</span><strong className="hero-post-title">{post.title}</strong></div><Link to={`/blog/${post.slug}`} aria-label="Ler o artigo"><ArrowUpRight size={24}/></Link></div></div></section>;
+}
