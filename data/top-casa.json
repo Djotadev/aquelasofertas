@@ -1,0 +1,436 @@
+{
+ "updated": "outubro de 2026",
+ "categories": [
+  {
+   "id": "air-fryers",
+   "label": "Air fryers",
+   "intro": "Do modelo compacto ao forno de bancada. Escolha pela capacidade (cerca de 2 a 3 L para uma pessoa, 4 a 5 L para família pequena, 6 L ou mais para quem cozinha em quantidade) e confira se é 127 V ou 220 V antes de comprar.",
+   "items": [
+    {
+     "slug": "af-oster-ofrt520",
+     "name": "Oster OFRT520",
+     "badge": "Para uma pessoa",
+     "summary": "Compacta, boa para quem mora sozinho e tem pouco espaço na bancada.",
+     "pros": [
+      "Tamanho compacto",
+      "Guias a citam como melhor para uma pessoa"
+     ],
+     "cons": [
+      "Pouca capacidade para a família",
+      "Confira a voltagem do modelo"
+     ],
+     "query": "oster air fryer ofrt520"
+    },
+    {
+     "slug": "af-mondial-afn-40",
+     "name": "Mondial Family AFN-40",
+     "badge": "Equilíbrio de tamanho e preço",
+     "summary": "Marca muito popular no Brasil, com 4 litros e preço competitivo quando entra em promoção.",
+     "pros": [
+      "Capacidade de 4 litros",
+      "Marca com muita oferta e avaliações"
+     ],
+     "cons": [
+      "Para mais de 3 pessoas pode ficar pequena"
+     ],
+     "query": "mondial family afn-40 air fryer"
+    },
+    {
+     "slug": "af-britania-bfr46",
+     "name": "Britânia BFR46",
+     "badge": "Intermediária",
+     "summary": "Boa opção de custo-benefício entre as de capacidade média, com 1500 W e temperatura de até 200 °C.",
+     "pros": [
+      "1500 W e temporizador de até 60 minutos",
+      "Tecnologia de circulação 360°"
+     ],
+     "cons": [
+      "Visual simples, sem muitos recursos"
+     ],
+     "query": "britânia air fryer bfr46"
+    },
+    {
+     "slug": "af-mondial-afn-50",
+     "name": "Mondial Grand Family AFN-50",
+     "badge": "Família grande",
+     "summary": "Capacidade de até 5 litros, indicada para quem cozinha para mais gente.",
+     "pros": [
+      "Cesto grande, até 5 litros",
+      "Pés antiderrapantes"
+     ],
+     "cons": [
+      "Ocupa mais espaço na bancada"
+     ],
+     "query": "mondial grand family afn-50"
+    },
+    {
+     "slug": "af-britania-bfr50",
+     "name": "Britânia BFR50 Redstone",
+     "badge": "Custo-benefício em destaque",
+     "summary": "Aparece com frequência no topo dos guias, com 5,5 litros, 1500 W e revestimento antiaderente.",
+     "pros": [
+      "5,5 litros e 1500 W",
+      "Antiaderente e temperatura de 80 a 200 °C"
+     ],
+     "cons": [
+      "Painel simples, não é digital"
+     ],
+     "query": "britânia air fryer bfr50 redstone"
+    },
+    {
+     "slug": "af-philco-paf65",
+     "name": "Philco PAF65 Visor Glass",
+     "badge": "Para a família",
+     "summary": "Tem 6,5 litros, 1700 W e visor de vidro para acompanhar o preparo sem abrir a tampa.",
+     "pros": [
+      "Visor de vidro para olhar o preparo",
+      "6,5 litros e boa potência"
+     ],
+     "cons": [
+      "Maior e mais cara que as de cesto básico"
+     ],
+     "query": "philco air fryer paf65"
+    },
+    {
+     "slug": "af-oster-oven-12l",
+     "name": "Oster Oven Fryer 12 L",
+     "badge": "Tipo forno",
+     "summary": "Air fryer em formato de forno, com várias funções e bandejas, para assar, gratinar e fritar.",
+     "pros": [
+      "12 litros e função forno 3 em 1",
+      "Cozinha porções maiores de uma vez"
+     ],
+     "cons": [
+      "Ocupa bastante espaço",
+      "Mais cara que as air fryers de cesto"
+     ],
+     "query": "oster oven fryer 12l"
+    }
+   ]
+  },
+  {
+   "id": "robos",
+   "label": "Robôs aspiradores",
+   "intro": "Do mais simples ao mais completo. Navegação com mapa a laser faz mais diferença na limpeza do dia a dia do que a potência isolada, e o pano do robô precisa ser lavado após o uso. Confira a voltagem e se há assistência técnica no Brasil.",
+   "items": [
+    {
+     "slug": "ro-multilaser-mars",
+     "name": "Multilaser Mars HO400",
+     "badge": "Entrada e mais vendido",
+     "summary": "Robô básico e barato, para quem quer testar o conceito de manter o chão limpo entre as faxinas.",
+     "pros": [
+      "Preço baixo",
+      "Bivolt",
+      "Fácil de usar"
+     ],
+     "cons": [
+      "Navegação mais simples, sem mapa a laser",
+      "Sucção modesta"
+     ],
+     "query": "multilaser robô aspirador mars"
+    },
+    {
+     "slug": "ro-wap-w300",
+     "name": "WAP Robot W300",
+     "badge": "Nacional e barato",
+     "summary": "Marca nacional, com assistência e peças no Brasil, boa para apartamentos pequenos.",
+     "pros": [
+      "Assistência técnica e peças no Brasil",
+      "Função 3 em 1 (varre, aspira e passa pano)"
+     ],
+     "cons": [
+      "Navegação básica",
+      "Menos recursos de aplicativo"
+     ],
+     "query": "wap robot w300"
+    },
+    {
+     "slug": "ro-xiaomi-e10",
+     "name": "Xiaomi Robot Vacuum E10",
+     "badge": "Entrada bivolt",
+     "summary": "Marca conhecida e preço de entrada, para casas pequenas e piso liso.",
+     "pros": [
+      "Bivolt",
+      "Marca com boa presença no Brasil"
+     ],
+     "cons": [
+      "Navegação mais simples que a dos modelos com laser"
+     ],
+     "query": "xiaomi robot vacuum e10"
+    },
+    {
+     "slug": "ro-xiaomi-s40c",
+     "name": "Xiaomi Robot Vacuum S40C",
+     "badge": "Entrada com mapa a laser",
+     "summary": "Citado por vários guias como um dos melhores custo-benefício de 2026, por trazer mapeamento a laser em faixa de preço mais baixa.",
+     "pros": [
+      "Mapeamento a laser",
+      "Sucção de 5.000 Pa"
+     ],
+     "cons": [
+      "Autonomia menor que a do S40"
+     ],
+     "query": "xiaomi robot vacuum s40c"
+    },
+    {
+     "slug": "ro-xiaomi-s40",
+     "name": "Xiaomi Robot Vacuum S40",
+     "badge": "Mais citado como melhor geral",
+     "summary": "Para a maioria das casas, une sucção alta, mapa a laser e bateria de longa duração.",
+     "pros": [
+      "10.000 Pa de sucção e mapa a laser de 360°",
+      "Mais de 180 minutos por carga",
+      "Zonas proibidas pelo aplicativo"
+     ],
+     "cons": [
+      "Não tem estação de coleta",
+      "Não esfrega o pano de verdade"
+     ],
+     "query": "xiaomi robot vacuum s40"
+    },
+    {
+     "slug": "ro-xiaomi-s10",
+     "name": "Xiaomi Robot Vacuum S10",
+     "badge": "Para passar pano",
+     "summary": "Boa opção para quem quer aspirar e passar pano, com mapeamento a laser.",
+     "pros": [
+      "Mapeamento a laser e função de pano",
+      "Sucção de 4.000 Pa"
+     ],
+     "cons": [
+      "Sucção menor que a do S40",
+      "Modelo mais antigo, confira a oferta"
+     ],
+     "query": "xiaomi robot vacuum s10"
+    },
+    {
+     "slug": "ro-xiaomi-x20-plus",
+     "name": "Xiaomi Robot Vacuum X20+",
+     "badge": "Premium com estação",
+     "summary": "Para quem quer o máximo de praticidade, com base de coleta e melhor função de pano.",
+     "pros": [
+      "Estação completa de coleta",
+      "Navegação e pano mais avançados"
+     ],
+     "cons": [
+      "Custo-benefício menor, é o mais caro do grupo"
+     ],
+     "query": "xiaomi robot vacuum x20+"
+    }
+   ]
+  },
+  {
+   "id": "cozinha",
+   "label": "Cozinha",
+   "intro": "Itens que valem a pena e duram. A ideia é saber o que conferir em cada um e ir direto para as ofertas. Compare potência, material e a garantia do fabricante.",
+   "items": [
+    {
+     "slug": "co-liquidificador",
+     "name": "Liquidificador",
+     "badge": "Básico de toda cozinha",
+     "summary": "Procure motor de boa potência, lâminas resistentes e copo de material durável.",
+     "pros": [
+      "Serve para sucos, vitaminas e molhos",
+      "Fácil de encontrar em promoção"
+     ],
+     "cons": [
+      "Copos de plástico fino riscam e mancham",
+      "Confira a voltagem"
+     ],
+     "query": "liquidificador 1200w"
+    },
+    {
+     "slug": "co-cafeteira",
+     "name": "Cafeteira elétrica",
+     "badge": "Café fresco todo dia",
+     "summary": "Prática para quem toma café em casa, com jarra térmica ou de vidro.",
+     "pros": [
+      "Prática e rápida",
+      "Preço acessível"
+     ],
+     "cons": [
+      "Filtros e peças de reposição têm custo recorrente"
+     ],
+     "query": "cafeteira elétrica"
+    },
+    {
+     "slug": "co-panela-eletrica",
+     "name": "Panela elétrica",
+     "badge": "Arroz e mais",
+     "summary": "Multifuncional, prepara arroz e outras receitas sem ficar de olho no fogão.",
+     "pros": [
+      "Praticidade no dia a dia",
+      "Boa para quem mora sozinho"
+     ],
+     "cons": [
+      "Ocupa espaço na bancada"
+     ],
+     "query": "panela elétrica de arroz"
+    },
+    {
+     "slug": "co-sanduicheira",
+     "name": "Sanduicheira ou grill",
+     "badge": "Lanche rápido",
+     "summary": "Boa para lanches, omeletes e carnes finas.",
+     "pros": [
+      "Rápida e fácil de usar",
+      "Ocupa pouco espaço"
+     ],
+     "cons": [
+      "Chapas sem antiaderente são difíceis de limpar"
+     ],
+     "query": "sanduicheira grill elétrico"
+    },
+    {
+     "slug": "co-potes-hermeticos",
+     "name": "Potes herméticos",
+     "badge": "Organização e durabilidade",
+     "summary": "Ajudam a manter alimentos frescos e a organizar despensa e geladeira.",
+     "pros": [
+      "Mantêm alimentos frescos por mais tempo",
+      "Servem para freezer e micro-ondas em modelos adequados"
+     ],
+     "cons": [
+      "Confira se são livres de BPA"
+     ],
+     "query": "kit potes herméticos"
+    },
+    {
+     "slug": "co-jogo-facas",
+     "name": "Jogo de facas",
+     "badge": "Corte seguro e preciso",
+     "summary": "Lâmina afiada e cabo firme fazem diferença no dia a dia.",
+     "pros": [
+      "Mais segurança e agilidade no preparo",
+      "Muitos kits com suporte"
+     ],
+     "cons": [
+      "Facas baratas perdem o fio rápido"
+     ],
+     "query": "jogo de facas cozinha aço inox"
+    },
+    {
+     "slug": "co-panelas-antiaderente",
+     "name": "Jogo de panelas antiaderente",
+     "badge": "Para o dia a dia",
+     "summary": "Confira o revestimento, o fundo e se serve no seu tipo de fogão.",
+     "pros": [
+      "Facilita a limpeza",
+      "Cozinha com menos óleo"
+     ],
+     "cons": [
+      "Riscos no revestimento encurtam a vida útil",
+      "Não use utensílios metálicos"
+     ],
+     "query": "jogo de panelas antiaderente"
+    }
+   ]
+  },
+  {
+   "id": "conforto",
+   "label": "Conforto e organização",
+   "intro": "Itens simples que melhoram a rotina de casa, do sono ao armário. Priorize qualidade do tecido, tamanho certo e facilidade de limpeza.",
+   "items": [
+    {
+     "slug": "cf-ventilador",
+     "name": "Ventilador",
+     "badge": "Refrescar sem gastar muito",
+     "summary": "Modelos de coluna e de mesa. Veja o nível de ruído, o número de velocidades e se tem oscilação.",
+     "pros": [
+      "Gasta pouca energia",
+      "Ajuda no calor"
+     ],
+     "cons": [
+      "Modelos baratos podem fazer barulho",
+      "Confira a voltagem"
+     ],
+     "query": "ventilador de coluna"
+    },
+    {
+     "slug": "cf-jogo-cama",
+     "name": "Jogo de cama",
+     "badge": "Descanso melhor",
+     "summary": "Escolha pela quantidade de fios, pelo tecido e pelo tamanho da cama.",
+     "pros": [
+      "Mais conforto no sono",
+      "Fácil de lavar"
+     ],
+     "cons": [
+      "O tamanho da cama muda o modelo, confira a medida"
+     ],
+     "query": "jogo de cama casal"
+    },
+    {
+     "slug": "cf-travesseiro",
+     "name": "Travesseiro",
+     "badge": "Conforto para a coluna",
+     "summary": "A altura e a firmeza dependem de como você dorme.",
+     "pros": [
+      "Suporte para o pescoço",
+      "Há modelos para cada posição"
+     ],
+     "cons": [
+      "Escolher o errado pode incomodar, e vale trocar com frequência"
+     ],
+     "query": "travesseiro"
+    },
+    {
+     "slug": "cf-organizador-armario",
+     "name": "Organizadores de armário",
+     "badge": "Casa mais arrumada",
+     "summary": "Caixas, divisórias e cabides que aproveitam melhor o espaço do guarda-roupa.",
+     "pros": [
+      "Economiza espaço",
+      "Preço baixo"
+     ],
+     "cons": [
+      "Meça o armário antes de comprar"
+     ],
+     "query": "organizador de armário"
+    },
+    {
+     "slug": "cf-mop-giratorio",
+     "name": "Mop giratório",
+     "badge": "Limpeza mais fácil",
+     "summary": "Esfregão com balde e centrífuga para lavar o chão com menos esforço.",
+     "pros": [
+      "Menos esforço físico",
+      "Refis baratos"
+     ],
+     "cons": [
+      "Ocupa espaço para guardar"
+     ],
+     "query": "mop giratório"
+    },
+    {
+     "slug": "cf-lampada-led",
+     "name": "Lâmpadas LED",
+     "badge": "Economia de energia",
+     "summary": "Menos consumo e vida útil maior. Escolha a temperatura de cor (quente ou fria) conforme o ambiente.",
+     "pros": [
+      "Gasta pouco",
+      "Dura bastante"
+     ],
+     "cons": [
+      "Confira se é bivolt e a temperatura de cor"
+     ],
+     "query": "lâmpada led"
+    },
+    {
+     "slug": "cf-tapete-antiderrapante",
+     "name": "Tapete antiderrapante",
+     "badge": "Segurança em casa",
+     "summary": "Boa para banheiro, cozinha e entrada, previne escorregões.",
+     "pros": [
+      "Mais segurança",
+      "Fácil de lavar"
+     ],
+     "cons": [
+      "Escolha base de borracha de qualidade"
+     ],
+     "query": "tapete antiderrapante"
+    }
+   ]
+  }
+ ]
+}

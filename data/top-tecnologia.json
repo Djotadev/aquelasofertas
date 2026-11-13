@@ -1,0 +1,481 @@
+{
+ "updated": "outubro de 2026",
+ "categories": [
+  {
+   "id": "notebooks",
+   "label": "Notebooks",
+   "intro": "Do mais básico ao gamer: configurações que fazem sentido para estudar, trabalhar e jogar. Priorize 8 GB de RAM no mínimo, SSD e tela Full HD, e confira o código exato do modelo antes de comprar.",
+   "items": [
+    {
+     "slug": "nb-vivobook-go-15",
+     "name": "ASUS Vivobook Go 15",
+     "badge": "Estudo e escritório",
+     "summary": "Leve e prático para documentos, aulas online e reuniões. Vale mirar a versão com Ryzen 5 7520U, 16 GB de RAM e SSD de 512 GB.",
+     "pros": [
+      "Tela Full HD de 15,6 polegadas",
+      "Cerca de 1,6 kg, fácil de carregar",
+      "Configuração de 16 GB e 512 GB disponível"
+     ],
+     "cons": [
+      "RAM soldada, não dá para ampliar",
+      "Algumas versões vêm sem Windows"
+     ],
+     "query": "asus vivobook go 15 ryzen 5 16gb"
+    },
+    {
+     "slug": "nb-aspire-5",
+     "name": "Acer Aspire 5",
+     "badge": "Melhor para fazer upgrade",
+     "summary": "Notebook convencional que entrega bom desempenho e, em várias versões, permite aumentar a memória e o armazenamento depois.",
+     "pros": [
+      "Ryzen 5 5500U com 6 núcleos e SSD NVMe de 512 GB",
+      "RAM e armazenamento expansíveis em versões compatíveis",
+      "Tela Full HD antirreflexo"
+     ],
+     "cons": [
+      "Há versões com apenas 8 GB de RAM",
+      "Vídeo integrado é básico"
+     ],
+     "query": "acer aspire 5"
+    },
+    {
+     "slug": "nb-ideapad-slim-3",
+     "name": "Lenovo IdeaPad Slim 3 (Ryzen 7)",
+     "badge": "Mais desempenho sem placa gamer",
+     "summary": "Boa pedida para multitarefa pesada, programação e edição leve, com um processador de 8 núcleos sem pagar preço de gamer.",
+     "pros": [
+      "Ryzen 7 7735HS com 8 núcleos e 16 threads",
+      "Tela 16:10 WUXGA em algumas versões",
+      "Boa para produtividade intensa"
+     ],
+     "cons": [
+      "Versões com 8 GB de RAM limitam o processador",
+      "Algumas saem com Linux"
+     ],
+     "query": "lenovo ideapad slim 3 ryzen 7"
+    },
+    {
+     "slug": "nb-galaxy-book4",
+     "name": "Samsung Galaxy Book4",
+     "badge": "Leve e integrado ao Galaxy",
+     "summary": "Fino e discreto, com integração útil para quem já usa celular Samsung. A versão com i5, 16 GB e 512 GB é a mais interessante.",
+     "pros": [
+      "Core i5-1335U com 16 GB e 512 GB na melhor versão",
+      "Cerca de 1,55 kg",
+      "Integração com celulares Galaxy"
+     ],
+     "cons": [
+      "Algumas versões têm 8 GB soldados",
+      "Tela comum, sem recursos premium"
+     ],
+     "query": "samsung galaxy book4 i5 16gb"
+    },
+    {
+     "slug": "nb-macbook-neo",
+     "name": "MacBook Neo",
+     "badge": "Para quem prefere macOS",
+     "summary": "Compacto e com boa bateria, indicado para quem já está no ecossistema Apple e faz tarefas do dia a dia.",
+     "pros": [
+      "Chip A18 Pro e SSD de 512 GB",
+      "Tela de 13 polegadas e cerca de 1,2 kg",
+      "Autonomia anunciada de até 16 horas de vídeo"
+     ],
+     "cons": [
+      "8 GB de memória, sem upgrade",
+      "Não roda programas exclusivos de Windows"
+     ],
+     "query": "macbook neo"
+    },
+    {
+     "slug": "nb-nitro-v15",
+     "name": "Acer Nitro V15",
+     "badge": "Gamer em Full HD",
+     "summary": "Para jogar e editar com placa dedicada. A configuração a priorizar tem Ryzen 7 7735HS, RTX 4050 e 16 GB de RAM.",
+     "pros": [
+      "RTX 4050 com 6 GB para jogos em Full HD",
+      "Tela de até 165 Hz em algumas versões",
+      "RAM e SSD expansíveis em versões compatíveis"
+     ],
+     "cons": [
+      "Ventoinhas barulhentas sob carga",
+      "Bateria curta durante jogos"
+     ],
+     "query": "acer nitro v15 rtx 4050"
+    },
+    {
+     "slug": "nb-lenovo-loq",
+     "name": "Lenovo LOQ",
+     "badge": "Alternativa gamer",
+     "summary": "Concorrente direto do Nitro V15. Compare a placa de vídeo, a tela e o preço das versões com RTX 3050 e RTX 4050.",
+     "pros": [
+      "Opções com RTX 3050 ou RTX 4050",
+      "Tela de até 144 Hz em algumas versões",
+      "Refrigeração preparada para peças potentes"
+     ],
+     "cons": [
+      "Pesado para o dia a dia",
+      "Preço varia bastante conforme a placa"
+     ],
+     "query": "lenovo loq rtx 4050"
+    }
+   ]
+  },
+  {
+   "id": "celulares",
+   "label": "Celulares",
+   "intro": "Selecionamos 7 celulares de faixas de preço próximas, do mais acessível ao mais completo. A ordem não é uma nota: o melhor depende de você priorizar bateria, câmera, jogos ou atualizações.",
+   "items": [
+    {
+     "slug": "cel-galaxy-a36",
+     "name": "Samsung Galaxy A36",
+     "badge": "Mais em conta",
+     "summary": "Boa tela e muitos anos de atualização gastando pouco. Faz mais sentido quando o preço está baixo.",
+     "pros": [
+      "Tela Super AMOLED de 6,7 polegadas e 120 Hz",
+      "IP67 e 6 anos de atualizações",
+      "Bom para uso diário"
+     ],
+     "cons": [
+      "Carregador de 15 W na caixa demora para encher",
+      "Não é indicado para jogos pesados"
+     ],
+     "query": "samsung galaxy a36 5g 128gb"
+    },
+    {
+     "slug": "cel-moto-g86",
+     "name": "Motorola Moto G86",
+     "badge": "Resistência e tela",
+     "summary": "Muito completo para a faixa de preço, com carcaça resistente e tela nítida e bem brilhante.",
+     "pros": [
+      "IP68, IP69 e Gorilla Glass 7i",
+      "Tela P-OLED 1,5K de 120 Hz",
+      "256 GB com cartão microSD e carregador de 33 W na caixa"
+     ],
+     "cons": [
+      "Apenas 3 anos de atualização de sistema",
+      "Jogos pesados rodam com limitações"
+     ],
+     "query": "motorola moto g86 5g 256gb"
+    },
+    {
+     "slug": "cel-edge-60-fusion",
+     "name": "Motorola Edge 60 Fusion",
+     "badge": "Bateria e tela",
+     "summary": "Vale quando o preço cai. Entrega tela curva muito brilhante e boa autonomia com carregamento rápido incluído.",
+     "pros": [
+      "Bateria de 5.200 mAh e carregador de 68 W na caixa",
+      "Tela P-OLED 1,5K curva",
+      "Resistência IP69"
+     ],
+     "cons": [
+      "Só 3 anos de atualizações",
+      "Não é o melhor para jogos"
+     ],
+     "query": "motorola edge 60 fusion 256gb"
+    },
+    {
+     "slug": "cel-galaxy-a57",
+     "name": "Samsung Galaxy A57",
+     "badge": "Samsung mais equilibrado",
+     "summary": "Um intermediário Samsung completo, com construção em alumínio, ótima tela e suporte longo de software.",
+     "pros": [
+      "Tela Super AMOLED de 120 Hz",
+      "IP68 e 6 anos de atualizações",
+      "Vídeo em 4K com boa estabilização"
+     ],
+     "cons": [
+      "Carregador de 15 W na caixa",
+      "Rende menos em jogos que o Poco X8 Pro"
+     ],
+     "query": "samsung galaxy a57 5g"
+    },
+    {
+     "slug": "cel-edge-70",
+     "name": "Motorola Edge 70",
+     "badge": "Fino e potente",
+     "summary": "Mais fino da seleção e com desempenho forte. Compensa mais quando aparece com desconto grande.",
+     "pros": [
+      "Snapdragon 7 Gen 4 e três câmeras de 50 MP",
+      "Carregamento sem fio e carregador de 68 W",
+      "Resistência IP68 e IP69"
+     ],
+     "cons": [
+      "Bateria de 4.800 mAh, a menor do grupo",
+      "Sem cartão de memória"
+     ],
+     "query": "motorola edge 70 5g 256gb"
+    },
+    {
+     "slug": "cel-poco-x8-pro",
+     "name": "Xiaomi Poco X8 Pro",
+     "badge": "Jogos e bateria",
+     "summary": "O mais forte em desempenho e autonomia do grupo, com carregador rápido de 100 W incluído.",
+     "pros": [
+      "Dimensity 8500 Ultra, muito rápido",
+      "Bateria de 6.500 mAh",
+      "Carregador de 100 W, capinha e película na caixa"
+     ],
+     "cons": [
+      "Câmeras abaixo da média",
+      "Interface tem anúncios"
+     ],
+     "query": "xiaomi poco x8 pro 256gb"
+    },
+    {
+     "slug": "cel-edge-60-pro",
+     "name": "Motorola Edge 60 Pro",
+     "badge": "Melhor para fotos",
+     "summary": "Indicado para quem prioriza câmera, com lente telefoto de zoom óptico 3x, rara nessa faixa de preço.",
+     "pros": [
+      "Telefoto de 10 MP com zoom 3x",
+      "Bateria de 6.000 mAh e carregador de 90 W",
+      "Carregamento sem fio de 15 W"
+     ],
+     "cons": [
+      "Apenas 3 anos de atualizações",
+      "Para jogos, o Poco é mais forte"
+     ],
+     "query": "motorola edge 60 pro 256gb"
+    }
+   ]
+  },
+  {
+   "id": "tablets",
+   "label": "Tablets",
+   "intro": "Opções para estudar, assistir e trabalhar, do mais compacto ao mais completo. Confira sempre a versão (Wi-Fi ou 5G), a memória e se o carregador vem na caixa.",
+   "items": [
+    {
+     "slug": "tab-galaxy-tab-a11",
+     "name": "Samsung Galaxy Tab A11",
+     "badge": "Compacto e barato",
+     "summary": "O mais leve da seleção, bom para ler e assistir vídeos. Para uso moderado, sem jogos exigentes.",
+     "pros": [
+      "Tela de 8,7 polegadas e 90 Hz",
+      "Cartão microSD de até 2 TB",
+      "Entrada de fone de 3,5 mm"
+     ],
+     "cons": [
+      "Resolução modesta e 4 GB de RAM",
+      "Bateria menor que a dos modelos de 11 polegadas"
+     ],
+     "query": "samsung galaxy tab a11 64gb"
+    },
+    {
+     "slug": "tab-redmi-pad-2",
+     "name": "Xiaomi Redmi Pad 2",
+     "badge": "Tela grande e bateria",
+     "summary": "Tela de 11 polegadas bem definida e bateria grande por pouco mais. A versão de 8 GB e 256 GB é a mais recomendada.",
+     "pros": [
+      "Tela 2,5K de 11 polegadas",
+      "Bateria de 9.000 mAh",
+      "Alto-falantes com Dolby Atmos e microSD"
+     ],
+     "cons": [
+      "Carregamento de só 18 W",
+      "Desempenho limitado para jogos pesados"
+     ],
+     "query": "xiaomi redmi pad 2"
+    },
+    {
+     "slug": "tab-galaxy-tab-a11-plus",
+     "name": "Samsung Galaxy Tab A11+",
+     "badge": "Samsung de 11 polegadas",
+     "summary": "Mais fôlego que o A11 básico para multitarefa, aulas e chamadas de vídeo.",
+     "pros": [
+      "Processador Dimensity 7300 com 6 GB de RAM",
+      "Bateria de 7.040 mAh e Samsung DeX",
+      "MicroSD de até 2 TB"
+     ],
+     "cons": [
+      "Carregamento de 25 W",
+      "A versão 5G pode custar mais"
+     ],
+     "query": "samsung galaxy tab a11+ 128gb"
+    },
+    {
+     "slug": "tab-lenovo-idea-tab",
+     "name": "Lenovo Idea Tab",
+     "badge": "Ótimo para estudar",
+     "summary": "Tela nítida e 8 GB de RAM, e em algumas ofertas vem com caneta e capa.",
+     "pros": [
+      "Tela 2,5K de 11 polegadas",
+      "8 GB de RAM e quatro alto-falantes",
+      "Caneta e capa em algumas ofertas"
+     ],
+     "cons": [
+      "Brilho de até 500 nits",
+      "Desempenho intermediário"
+     ],
+     "query": "lenovo idea tab 8gb 128gb"
+    },
+    {
+     "slug": "tab-xiaomi-pad-7",
+     "name": "Xiaomi Pad 7",
+     "badge": "Desempenho e tela",
+     "summary": "Dá um salto em tela e processador. Para jogar, assistir em alta resolução e durar anos.",
+     "pros": [
+      "Tela 3,2K de até 144 Hz",
+      "Snapdragon 7+ Gen 3 com 12 GB e 256 GB",
+      "Carregamento de 45 W"
+     ],
+     "cons": [
+      "Não tem entrada para microSD",
+      "Painel LCD, não AMOLED"
+     ],
+     "query": "xiaomi pad 7 12gb 256gb"
+    },
+    {
+     "slug": "tab-galaxy-tab-s10-fe",
+     "name": "Samsung Galaxy Tab S10 FE",
+     "badge": "Com S Pen e IP68",
+     "summary": "Para quem estuda e trabalha à mão e quer caneta inclusa e resistência a água e poeira.",
+     "pros": [
+      "S Pen incluída",
+      "Resistência IP68 e Samsung DeX",
+      "MicroSD e carregamento de 45 W"
+     ],
+     "cons": [
+      "Tela LCD, sem os pretos do AMOLED",
+      "Preço mais elevado"
+     ],
+     "query": "samsung galaxy tab s10 fe 128gb"
+    },
+    {
+     "slug": "tab-ipad-a16",
+     "name": "Apple iPad (chip A16)",
+     "badge": "Para quem usa iPhone",
+     "summary": "Boa escolha para quem já está no ecossistema Apple e quer estudar, desenhar e se divertir.",
+     "pros": [
+      "Chip A16 fluido",
+      "Tela de 11 polegadas",
+      "Opções de 128 a 512 GB"
+     ],
+     "cons": [
+      "Tela de 60 Hz",
+      "Apple Pencil e teclado vendidos à parte"
+     ],
+     "query": "ipad 11 a16 128gb"
+    }
+   ]
+  },
+  {
+   "id": "smartwatches",
+   "label": "Smartwatches",
+   "intro": "Do mais básico ao mais completo. Se você usa iPhone, o Apple Watch é a escolha mais integrada, e se usa Android, os Galaxy Watch funcionam melhor com celulares Samsung.",
+   "items": [
+    {
+     "slug": "sw-redmi-watch-5-active",
+     "name": "Redmi Watch 5 Active",
+     "badge": "Mais barato",
+     "summary": "Para quem quer só notificações, treino básico e bateria que dura. Chamadas pelo Bluetooth incluídas.",
+     "pros": [
+      "Bateria de até 18 dias",
+      "Tela de 2 polegadas e chamadas Bluetooth",
+      "Mais de 140 modos de treino e 5 ATM"
+     ],
+     "cons": [
+      "Sem GPS integrado",
+      "Tela LCD e recursos esportivos básicos"
+     ],
+     "query": "redmi watch 5 active"
+    },
+    {
+     "slug": "sw-amazfit-bip-6",
+     "name": "Amazfit Bip 6",
+     "badge": "GPS barato",
+     "summary": "Raro por entregar GPS integrado e tela AMOLED na faixa de preço baixa, bom para quem caminha e corre.",
+     "pros": [
+      "GPS integrado",
+      "Tela AMOLED de 1,97 polegada",
+      "Até duas semanas de bateria"
+     ],
+     "cons": [
+      "Sistema mais simples",
+      "Poucos aplicativos de terceiros"
+     ],
+     "query": "amazfit bip 6"
+    },
+    {
+     "slug": "sw-huawei-watch-fit-5",
+     "name": "Huawei Watch Fit 5",
+     "badge": "Esportes e acabamento",
+     "summary": "Intermediário bem acabado, com GPS de banda dupla e boas métricas de treino. Funciona com Android e iPhone.",
+     "pros": [
+      "Tela AMOLED retangular",
+      "GPS de banda dupla",
+      "Leve e confortável"
+     ],
+     "cons": [
+      "Menos apps que Wear OS e watchOS",
+      "Alguns recursos variam conforme o celular"
+     ],
+     "query": "huawei watch fit 5"
+    },
+    {
+     "slug": "sw-amazfit-balance-2",
+     "name": "Amazfit Balance 2",
+     "badge": "Bateria e esportes",
+     "summary": "Recursos esportivos completos e bateria longa, sem depender de Wear OS ou watchOS.",
+     "pros": [
+      "GPS de dupla frequência",
+      "Até 21 dias de bateria, segundo a fabricante",
+      "Tela AMOLED"
+     ],
+     "cons": [
+      "Biblioteca de apps menor",
+      "Alguns recursos dependem do app Zepp"
+     ],
+     "query": "amazfit balance 2"
+    },
+    {
+     "slug": "sw-galaxy-watch-8",
+     "name": "Samsung Galaxy Watch 8",
+     "badge": "Melhor para Android",
+     "summary": "O mais equilibrado para quem usa Android, com apps, NFC, GPS e sensores de saúde completos.",
+     "pros": [
+      "Wear OS com acesso a vários aplicativos",
+      "GPS, NFC e ECG",
+      "Mais fino e confortável que o Ultra"
+     ],
+     "cons": [
+      "Bateria de cerca de um dia",
+      "Funciona melhor com celulares Samsung"
+     ],
+     "query": "samsung galaxy watch 8 44mm"
+    },
+    {
+     "slug": "sw-apple-watch-se-3",
+     "name": "Apple Watch SE 3",
+     "badge": "Melhor para iPhone",
+     "summary": "Entrada mais sensata no mundo Apple, com ótima integração e bons recursos de saúde sem pagar pelo Series.",
+     "pros": [
+      "Chip S10 e tela sempre ativa",
+      "64 GB e sensores de saúde",
+      "Integração profunda com o iPhone"
+     ],
+     "cons": [
+      "Até 18 h de uso normal",
+      "Só funciona com iPhone"
+     ],
+     "query": "apple watch se 3"
+    },
+    {
+     "slug": "sw-galaxy-watch-ultra",
+     "name": "Samsung Galaxy Watch Ultra",
+     "badge": "Premium resistente",
+     "summary": "Para treinar pesado: titânio, GPS de dupla frequência e bateria bem maior. O modelo original fica mais em conta que o Ultra 2.",
+     "pros": [
+      "Titânio, 10 ATM e MIL-STD-810H",
+      "GPS de dupla frequência e 64 GB",
+      "Até 100 horas no modo economia"
+     ],
+     "cons": [
+      "Grande e pesado",
+      "Exagerado se você só quer notificações"
+     ],
+     "query": "samsung galaxy watch ultra"
+    }
+   ]
+  }
+ ]
+}
