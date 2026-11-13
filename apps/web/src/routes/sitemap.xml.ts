@@ -7,7 +7,7 @@ type SitemapEntry = {
 	lastmod?: string;
 };
 
-const STATIC_PATHS = ['/', '/tecnologia', '/fitness', '/casa', '/sobre', '/aviso-de-afiliados'];
+const STATIC_PATHS = ['/', '/ofertas', '/guias', '/tecnologia', '/fitness', '/casa', '/sobre', '/aviso-de-afiliados', '/termos'];
 
 function escapeXml(value: string): string {
 	return value
