@@ -1,3 +1,6 @@
+# Aquelas Ofertas
+Configuração do servidor, WAHA e painel: veja `docs/CONFIGURAR-EASYPANEL-WAHA.md`.
+
 # Integração com o Mercado Livre
 
 O blog consulta o Mercado Livre pelo servidor e mostra, dentro dos artigos, cartões de produto com

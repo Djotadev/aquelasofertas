@@ -7,6 +7,7 @@ await build({
   outfile: 'dist/server.js',
   bundle: true,
   platform: 'node',
+  external: ['node:sqlite'],
   format: 'esm',
   target: 'node20',
   logLevel: 'info',
