@@ -31,9 +31,10 @@ export async function action({ request }: Route.ActionArgs) {
 	else run("INSERT INTO subscribers (phone, pending_name, pending_categories, status, code_hash, code_expires, consent_at, created_at) VALUES (?, ?, ?, 'pendente', ?, ?, ?, ?)", phone, name, JSON.stringify(cats), codeHash(phone, code), expires, now(), now());
 	try {
 		await sendText(phone, codeText(code));
-	} catch (error) {
+		} catch (error) {
 		console.error('[inscrever] falha ao enviar o código:', (error as Error).message);
-		return reply({ error: 'Não conseguimos enviar o código agora. Confira o número e tente de novo em instantes.' }, 502);
+		const naoTem = (error as Error).message.includes('não tem WhatsApp');
+		return reply({ error: naoTem ? 'Esse número não parece ter WhatsApp. Confira o número e tente de novo.' : 'Não conseguimos enviar o código agora. Confira o número e tente de novo em instantes.' }, naoTem ? 400 : 502);
 	}
 	return reply({ ok: true });
 }
