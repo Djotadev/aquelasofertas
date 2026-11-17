@@ -4,10 +4,31 @@ const session = () => process.env.WAHA_SESSION || 'default';
 const headers = () => ({ 'content-type': 'application/json', accept: 'application/json', ...(process.env.WAHA_API_KEY ? { 'X-Api-Key': process.env.WAHA_API_KEY } : {}) });
 export const wahaConfigured = () => !!base();
 
+/** Pergunta ao WAHA qual é o endereço real do número (contas antigas no Brasil podem não ter o 9). */
+async function resolveChatId(phone: string): Promise<string> {
+	try {
+		const res = await fetch(`${base()}/api/contacts/check-exists?phone=${encodeURIComponent(phone)}&session=${session()}`, { headers: headers(), signal: AbortSignal.timeout(10000) });
+		if (res.ok) {
+			const json: any = await res.json();
+			if (json.numberExists === false) throw new Error('Este número não tem WhatsApp');
+			if (typeof json.chatId === 'string' && json.chatId) return json.chatId;
+		}
+	} catch (error) {
+		if ((error as Error).message.includes('não tem WhatsApp')) throw error;
+		// Se a checagem falhar por outro motivo, tenta enviar com o número original.
+	}
+	return `${phone}@c.us`;
+}
+
 export async function sendText(phone: string, text: string): Promise<void> {
 	if (!wahaConfigured()) throw new Error('WAHA_URL não configurado');
-	const res = await fetch(`${base()}/api/sendText`, { method: 'POST', headers: headers(), body: JSON.stringify({ session: session(), chatId: `${phone}@c.us`, text }), signal: AbortSignal.timeout(15000) });
-	if (!res.ok) throw new Error(`WAHA respondeu ${res.status}: ${(await res.text()).slice(0, 160)}`);
+	const chatId = await resolveChatId(phone);
+	const res = await fetch(`${base()}/api/sendText`, { method: 'POST', headers: headers(), body: JSON.stringify({ session: session(), chatId, text }), signal: AbortSignal.timeout(15000) });
+	if (!res.ok) {
+		const body = await res.text();
+		if (/not on whatsapp/i.test(body)) throw new Error('Este número não tem WhatsApp');
+		throw new Error(`WAHA respondeu ${res.status}: ${body.slice(0, 160)}`);
+	}
 }
 export async function sessionStatus(): Promise<{ configured: boolean; status: string; error?: string }> {
 	if (!wahaConfigured()) return { configured: false, status: 'NAO_CONFIGURADO' };
