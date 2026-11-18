@@ -1,11 +1,15 @@
 import type { Route } from './+types/api.admin';
-import { all, one, run, now, getSetting, setSetting } from '@/lib/db.server';
+import { all, one, run, now, getSetting, setSetting, getText } from '@/lib/db.server';
+import { parseSource, testSource, collectAll, loadFilters, validCategory } from '@/lib/collector.server';
+import { loadAuto, publishRound } from '@/lib/scheduler.server';
+import { shopeeConfigured } from '@/lib/shopee.server';
 import { login, logout, getAdmin, isSecure, sessionCookie, clearCookie, sameOrigin, listAdmins } from '@/lib/auth.server';
 import { hashPassword } from '@/lib/crypto.server';
 import { allow, clientIp } from '@/lib/limits.server';
 import { categoryIds } from '@/lib/categories';
 import { normalizePhone } from '@/lib/phone';
-import { enqueueOffer, startWorker } from '@/lib/queue.server';
+import { startWorker } from '@/lib/queue.server';
+import { publishOffer } from '@/lib/publish.server';
 import { sendText, sessionStatus, startSession, qrImage } from '@/lib/waha.server';
 
 const json = (data: unknown, status = 200, headers?: HeadersInit) => Response.json(data, { status, headers });
@@ -26,14 +30,7 @@ function cleanOffer(b: any) {
 	if (b.image && !image) return { error: 'A imagem precisa ser um link https://' };
 	return { value: { title, category: b.category, url, price, old_price: old, image, store: String(b.store || '').trim().slice(0, 40) || null, coupon: String(b.coupon || '').trim().slice(0, 30) || null, description: String(b.description || '').trim().slice(0, 300) || null } };
 }
-function publish(id: number, request: Request) {
-	const offer = one('SELECT * FROM offers WHERE id = ?', id);
-	if (!offer) return { error: 'Oferta não encontrada' };
-	if (offer.status === 'publicada') return { ok: true, enviados: 0, ignorados: 0, jaPublicada: true };
-	run("UPDATE offers SET status = 'publicada', published_at = ? WHERE id = ?", now(), id);
-	startWorker();
-	return { ok: true, ...enqueueOffer({ ...offer, id }, baseUrl(request)) };
-}
+const publish = (id: number, request: Request) => publishOffer(id, baseUrl(request));
 
 export async function loader({ request, params }: Route.LoaderArgs) {
 	startWorker();
@@ -53,6 +50,11 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 			return json({ offers: all('SELECT * FROM offers WHERE status = ? ORDER BY id DESC LIMIT 200', status) });
 		}
 		case 'admins': return json({ admins: listAdmins() });
+		case 'sources': return json({ sources: all('SELECT * FROM sources ORDER BY id').map(parseSource), credenciais: { shopee: shopeeConfigured(), ml: !!(process.env.ML_CLIENT_ID && process.env.ML_CLIENT_SECRET) } });
+		case 'automation': {
+			let last = null; try { last = JSON.parse(getText('last_run_info', 'null')); } catch { /* vazio */ }
+			return json({ ...loadAuto(), filters: loadFilters(), max_per_day: getSetting('max_per_day', 5), last, publicUrl: !!process.env.PUBLIC_URL });
+		}
 		case 'whatsapp': {
 			const box = Object.fromEntries(all('SELECT status, COUNT(*) AS n FROM outbox GROUP BY status').map(r => [r.status, r.n]));
 			return json({ ...(await sessionStatus()), settings: { max_per_day: getSetting('max_per_day', 5), delay_min: getSetting('delay_min', 4), delay_max: getSetting('delay_max', 9) }, outbox: box, falhas: all("SELECT phone, error, created_at FROM outbox WHERE status = 'falhou' ORDER BY id DESC LIMIT 5").map(f => ({ ...f, phone: f.phone.replace(/^(\d{4})\d+(\d{2})$/, '$1*****$2') })) });
@@ -97,6 +99,38 @@ export async function action({ request, params }: Route.ActionArgs) {
 			return json({ ok: true });
 		}
 		case 'offer-delete': run('DELETE FROM offers WHERE id = ?', Number(b.id)); return json({ ok: true });
+		case 'source-save': {
+			const name = String(b.name || '').trim();
+			if (name.length < 2 || name.length > 40) return json({ error: 'Dê um nome à fonte (2 a 40 caracteres).' }, 400);
+			if (!['shopee', 'ml_watch'].includes(b.type)) return json({ error: 'Tipo de fonte inválido.' }, 400);
+			if (!validCategory(b.category)) return json({ error: 'Escolha uma categoria.' }, 400);
+			const keyword = String(b.keyword || '').trim().slice(0, 60);
+			if (b.type === 'shopee' && keyword.length < 2) return json({ error: 'Informe a palavra-chave da busca na Shopee.' }, 400);
+			const config = JSON.stringify(b.type === 'shopee' ? { keyword, limit: Math.min(50, Math.max(1, Math.round(Number(b.limit)) || 20)), sortType: Math.min(5, Math.max(1, Math.round(Number(b.sortType)) || 2)) } : {});
+			if (Number(b.id)) run('UPDATE sources SET name = ?, type = ?, category = ?, config = ? WHERE id = ?', name, b.type, b.category, config, Number(b.id));
+			else run('INSERT INTO sources (name, type, category, config, created_at) VALUES (?, ?, ?, ?, ?)', name, b.type, b.category, config, now());
+			return json({ ok: true });
+		}
+		case 'source-delete': run('DELETE FROM sources WHERE id = ?', Number(b.id)); return json({ ok: true });
+		case 'source-toggle': run('UPDATE sources SET enabled = 1 - enabled WHERE id = ?', Number(b.id)); return json({ ok: true });
+		case 'source-test': {
+			const row = one('SELECT * FROM sources WHERE id = ?', Number(b.id));
+			if (!row) return json({ error: 'Fonte não encontrada' }, 404);
+			try { return json({ preview: await testSource(parseSource(row)) }); } catch (e) { return json({ error: (e as Error).message }, 502); }
+		}
+		case 'collect-now': return json({ ok: true, ...(await collectAll()) });
+		case 'publish-round': return json({ ok: true, ...publishRound(Math.min(20, Math.max(1, Math.round(Number(b.count)) || 2)), baseUrl(request)) });
+		case 'automation-save': {
+			const hours = String(b.publish_hours || '').split(',').map((s: string) => s.trim()).filter(Boolean);
+			const okHour = (h: string) => /^([01]\d|2[0-3]):[0-5]\d$/.test(h);
+			if (!okHour(String(b.collect_hour)) || !hours.length || hours.length > 8 || !hours.every(okHour)) return json({ error: 'Horários no formato HH:MM, por exemplo 09:00,13:00,19:00 (até 8).' }, 400);
+			const perSlot = Math.round(Number(b.per_slot)), disc = Number(b.min_discount), rating = Number(b.min_rating), sales = Math.round(Number(b.min_sales));
+			if (!(perSlot >= 1 && perSlot <= 10) || !(disc >= 0 && disc <= 90) || !(rating >= 0 && rating <= 5) || !(sales >= 0)) return json({ error: 'Confira os números: 1 a 10 ofertas por horário, desconto 0 a 90, nota 0 a 5.' }, 400);
+			const put = (k: string, v: string) => run('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value', k, v);
+			put('auto_enabled', b.enabled ? '1' : '0'); put('auto_mode', b.mode === 'automatico' ? 'automatico' : 'revisar'); put('collect_hour', String(b.collect_hour)); put('publish_hours', hours.join(','));
+			put('per_slot', String(perSlot)); put('min_discount', String(disc)); put('min_rating', String(rating)); put('min_sales', String(sales));
+			return json({ ok: true });
+		}
 		case 'publish-queue': {
 			let n = 0, enviados = 0;
 			for (const o of all("SELECT id FROM offers WHERE status = 'fila' ORDER BY id")) { const r: any = publish(o.id, request); n++; enviados += r.enviados || 0; }
