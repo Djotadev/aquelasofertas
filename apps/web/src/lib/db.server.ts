@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS sessions (
 	token_hash TEXT PRIMARY KEY, admin_id INTEGER NOT NULL, expires INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS sources (
+	id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT NOT NULL, category TEXT NOT NULL,
+	config TEXT NOT NULL DEFAULT '{}', enabled INTEGER NOT NULL DEFAULT 1,
+	last_run TEXT, last_status TEXT, last_count INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS price_watch (item_id TEXT PRIMARY KEY, last_price REAL NOT NULL, min_price REAL NOT NULL, updated_at TEXT NOT NULL);
 `;
 
 type Row = Record<string, any>;
@@ -49,7 +55,11 @@ export function getDb(): DatabaseSync {
 	fs.mkdirSync(dir, { recursive: true });
 	const instance = new DatabaseSync(path.join(dir, 'aquelas.db'));
 	instance.exec(SCHEMA);
-	const defaults: Record<string, string> = { max_per_day: '5', delay_min: '4', delay_max: '9' };
+	const cols = (instance.prepare('PRAGMA table_info(offers)').all() as Row[]).map(c => c.name);
+	if (!cols.includes('external_id')) instance.exec('ALTER TABLE offers ADD COLUMN external_id TEXT');
+	if (!cols.includes('score')) instance.exec('ALTER TABLE offers ADD COLUMN score REAL NOT NULL DEFAULT 0');
+	instance.exec('CREATE INDEX IF NOT EXISTS idx_offers_ext ON offers(external_id)');
+	const defaults: Record<string, string> = { max_per_day: '5', delay_min: '4', delay_max: '9', auto_enabled: '0', auto_mode: 'revisar', collect_hour: '06:00', publish_hours: '09:00,13:00,19:00', per_slot: '2', min_discount: '15', min_rating: '4.5', min_sales: '50' };
 	for (const [key, value] of Object.entries(defaults)) instance.prepare('INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)').run(key, value);
 	if (!(instance.prepare('SELECT COUNT(*) AS n FROM admins').get() as Row).n) {
 		const username = process.env.ADMIN_USER || 'admin';
@@ -68,4 +78,5 @@ export const one = (sql: string, ...params: any[]): Row | null => { const r = ge
 export const run = (sql: string, ...params: any[]) => getDb().prepare(sql).run(...params);
 export const now = () => new Date().toISOString();
 export const getSetting = (key: string, fallback: number) => { const r = one('SELECT value FROM settings WHERE key = ?', key); const n = Number(r?.value); return Number.isFinite(n) ? n : fallback; };
+export const getText = (key: string, fallback: string) => one('SELECT value FROM settings WHERE key = ?', key)?.value ?? fallback;
 export const setSetting = (key: string, value: number) => run('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value', key, String(value));

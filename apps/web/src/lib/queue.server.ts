@@ -59,4 +59,5 @@ export function startWorker() {
 	(globalThis as any).__aqWorker = true;
 	const loop = () => { tick().then(worked => setTimeout(loop, worked ? 300 : 2000)).catch(e => { console.error('[fila]', e); setTimeout(loop, 5000); }); };
 	setTimeout(loop, 1000);
+	import('./scheduler.server').then(m => m.startScheduler()).catch(e => console.error('[automação]', e));
 }

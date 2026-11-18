@@ -60,12 +60,12 @@ function toLiveItem(raw: RawItem): LiveItem {
 	};
 }
 
-export async function getLiveItems(ids: string[]): Promise<Record<string, LiveItem | null>> {
+export async function getLiveItems(ids: string[], opts: { fresh?: boolean } = {}): Promise<Record<string, LiveItem | null>> {
 	const out: Record<string, LiveItem | null> = {};
 	const missing: string[] = [];
 	for (const id of new Set(ids)) {
 		const hit = cache.get(id);
-		if (hit && Date.now() - hit.at < hit.ttl) out[id] = hit.item;
+		if (!opts.fresh && hit && Date.now() - hit.at < hit.ttl) out[id] = hit.item;
 		else missing.push(id);
 	}
 	if (missing.length) {
