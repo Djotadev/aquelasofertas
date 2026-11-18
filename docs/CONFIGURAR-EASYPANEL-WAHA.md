@@ -53,3 +53,19 @@ Não exponha o WAHA na internet sem a chave de API.
 
 ## 6. Backup
 Copie o volume `/data` (arquivo `aquelas.db`) com frequência, ou ative os snapshots da Contabo.
+
+## 7. Automação diária (coleta e envio)
+Variáveis novas no app do site:
+| Variável | Para quê |
+|---|---|
+| `SHOPEE_APP_ID`, `SHOPEE_APP_SECRET` | Busca de produtos na Shopee pela API oficial de afiliados (precisa de conta de afiliado aprovada com acesso à Open API) |
+| `ML_CLIENT_ID`, `ML_CLIENT_SECRET` | Monitor de preço do Mercado Livre (produtos com `itemId` no `produtos.json`) |
+| `PUBLIC_URL` | Obrigatória para a publicação automática (monta os links das mensagens) |
+
+No painel, aba **Fontes e automação**:
+1. **+ Nova fonte:** uma busca na Shopee (palavra-chave + categoria) ou o monitor de queda de preço do Mercado Livre.
+2. **Testar:** mostra o que a fonte encontraria, sem salvar nada.
+3. **Automação:** ligue, escolha o modo (você revisa antes de publicar, ou totalmente automático), a hora da coleta, os horários de publicação, quantas ofertas por horário e os filtros mínimos (desconto, nota, vendas).
+4. Comece com o modo "Eu reviso" por alguns dias. Quando as ofertas estiverem boas, passe para "Totalmente automático".
+
+Como funciona: na hora da coleta o sistema busca nas fontes, descarta o que não passa nos filtros e evita repetir o mesmo produto por 14 dias. Nos horários de publicação, publica as melhores da fila (maior pontuação). Cada pessoa continua limitada ao máximo diário da aba WhatsApp. Se o servidor ficou fora do ar, um horário perdido é recuperado até 3 horas depois.
