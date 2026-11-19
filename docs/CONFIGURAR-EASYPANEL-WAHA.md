@@ -69,3 +69,11 @@ No painel, aba **Fontes e automação**:
 4. Comece com o modo "Eu reviso" por alguns dias. Quando as ofertas estiverem boas, passe para "Totalmente automático".
 
 Como funciona: na hora da coleta o sistema busca nas fontes, descarta o que não passa nos filtros e evita repetir o mesmo produto por 14 dias. Nos horários de publicação, publica as melhores da fila (maior pontuação). Cada pessoa continua limitada ao máximo diário da aba WhatsApp. Se o servidor ficou fora do ar, um horário perdido é recuperado até 3 horas depois.
+
+## 8. Produtos do Mercado Livre pelo painel
+Aba **Produtos ML** no `/admin`: cadastre cada produto colando (1) o link do anúncio ou o código MLB e (2) o seu link de afiliado gerado no painel do Mercado Livre.
+- Com `ML_CLIENT_ID` e `ML_CLIENT_SECRET` configurados, o sistema busca nome, foto e preço sozinho e recusa anúncios inativos ou usados. Sem eles, informe o nome do produto.
+- **Criar oferta:** gera uma oferta na fila com o preço de hoje, pronta para publicar.
+- **Monitor de preço:** a fonte "Mercado Livre: queda de preço" (aba Fontes e automação) acompanha todos os produtos ativos e cria uma oferta quando o preço cai.
+- **Top 7:** no campo "Usar nos guias Top 7", escolha o item do guia. O botão e o preço dele nas páginas Tecnologia, Fitness e Casa e nos artigos passam a usar o seu link de afiliado.
+- O arquivo `produtos.json` continua funcionando, mas o painel tem prioridade.
