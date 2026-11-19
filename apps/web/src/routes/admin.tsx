@@ -2,6 +2,7 @@ import type { Route } from './+types/admin';
 import { useCallback, useEffect, useState } from 'react';
 import { categories, categoryLabel } from '@/lib/categories';
 import { money } from '@/lib/format';
+import { allTopItems } from '@/lib/tops';
 
 export function meta(_: Route.MetaArgs) { return [{ title: 'Painel — Aquelas Ofertas' }, { name: 'robots', content: 'noindex,nofollow' }]; }
 
@@ -12,7 +13,7 @@ async function call(op: string, body?: unknown) {
 	return json;
 }
 type Offer = { id: number; title: string; price: number | null; old_price: number | null; store: string | null; category: string; url: string; image: string | null; coupon: string | null; description: string | null; clicks: number; status: string };
-const TABS: [string, string][] = [['nova', 'Novas'], ['fila', 'Na fila'], ['publicada', 'Publicadas'], ['rejeitada', 'Rejeitadas'], ['manual', '+ Oferta manual'], ['fontes', 'Fontes e automação'], ['whatsapp', 'WhatsApp'], ['admins', 'Admins']];
+const TABS: [string, string][] = [['nova', 'Novas'], ['fila', 'Na fila'], ['publicada', 'Publicadas'], ['rejeitada', 'Rejeitadas'], ['manual', '+ Oferta manual'], ['ml', 'Produtos ML'], ['fontes', 'Fontes e automação'], ['whatsapp', 'WhatsApp'], ['admins', 'Admins']];
 
 export default function Admin() {
 	const [admin, setAdmin] = useState<{ username: string } | null | undefined>(undefined);
@@ -38,7 +39,7 @@ function Panel({ admin, onExit }: { admin: { username: string }; onExit: () => v
 		{note && <p className="form-msg">{note}</p>}
 		<div className="stat-row"><div><b>{stats?.ativos ?? 0}</b><span>inscritos ativos</span></div><div><b>{stats?.pendentes ?? 0}</b><span>pendentes</span></div><div><b>{stats?.saiu ?? 0}</b><span>saíram</span></div></div>
 		<div className="tab-row" role="tablist">{TABS.map(([id, label]) => <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'on' : ''} onClick={() => { setTab(id); setEditing(null); }}>{label}{['nova', 'fila'].includes(id) && n(id) ? ` (${n(id)})` : ''}</button>)}</div>
-		{tab === 'manual' || editing ? <OfferForm key={editing?.id ?? 'novo'} initial={editing} onDone={() => { setEditing(null); setTab(editing ? editing.status : 'fila'); refresh(); }} /> : tab === 'fontes' ? <Sources /> : tab === 'whatsapp' ? <WhatsApp /> : tab === 'admins' ? <Admins me={admin.username} /> : <OfferList key={`${tab}-${tick}`} status={tab} onChange={refresh} onEdit={setEditing} />}
+		{tab === 'manual' || editing ? <OfferForm key={editing?.id ?? 'novo'} initial={editing} onDone={() => { setEditing(null); setTab(editing ? editing.status : 'fila'); refresh(); }} /> : tab === 'ml' ? <MlProducts /> : tab === 'fontes' ? <Sources /> : tab === 'whatsapp' ? <WhatsApp /> : tab === 'admins' ? <Admins me={admin.username} /> : <OfferList key={`${tab}-${tick}`} status={tab} onChange={refresh} onEdit={setEditing} />}
 	</>;
 }
 
@@ -147,6 +148,30 @@ function Sources() {
 			{form.type === 'ml_watch' && <p className="muted">Acompanha o preço dos produtos cadastrados com itemId no produtos.json e cria uma oferta quando o preço cai.</p>}
 			<div className="admin-actions"><button className="primary-button">Salvar</button><button type="button" onClick={() => setForm(null)}>Cancelar</button></div></form>
 			: <button className="primary-button" onClick={() => setForm({ name: '', type: 'shopee', category: 'eletronicos', keyword: '', limit: 20, sortType: 2 })}>+ Nova fonte</button>}
+		{msg && <p className="form-msg">{msg}</p>}
+	</div>;
+}
+
+const topCat = (slug: string) => (/^(nb|cel|tab|sw)-/.test(slug) ? 'eletronicos' : /^(tn|ra|rc|su)-/.test(slug) ? 'fitness' : 'casa');
+function MlProducts() {
+	const [rows, setRows] = useState<any[]>([]); const [creds, setCreds] = useState(true); const [msg, setMsg] = useState(''); const [form, setForm] = useState<any>(null);
+	const load = useCallback(() => call('ml-products').then(r => { setRows(r.products); setCreds(r.creds); }).catch(e => setMsg(e.message)), []);
+	useEffect(() => { load(); }, [load]);
+	const act = async (op: string, body: unknown, ok = '') => { setMsg(''); try { const r = await call(op, body); setMsg(r.message || ok); load(); return r; } catch (e) { setMsg((e as Error).message); } };
+	const blank = { link: '', affiliate_url: '', category: 'eletronicos', title: '', slug: '' };
+	return <div className="admin-wa">
+		<p className="muted">Cadastre os produtos do Mercado Livre que você quer divulgar. O sistema acompanha o preço e avisa quando cai. Pode também gerar uma oferta na hora e usar o produto nos guias Top 7.</p>
+		{!creds && <p className="form-error">Sem ML_CLIENT_ID e ML_CLIENT_SECRET, o preço e a foto não são buscados automaticamente (informe o nome do produto ao cadastrar).</p>}
+		<div className="admin-list">{rows.length === 0 && <p className="muted">Nenhum produto cadastrado ainda.</p>}{rows.map(p => <div className="admin-row" key={p.id}>
+			<div className="admin-row-main"><b>{p.title}{p.active ? '' : ' (pausado)'}</b><span>{p.item_id} · {categoryLabel(p.category)}{p.slug ? ` · Top 7: ${p.slug}` : ''}{p.live?.price != null ? ` · agora ${money(p.live.price)}` : ''}{p.live && !p.live.available ? ' · ⚠️ inativo ou usado' : ''}</span></div>
+			<div className="admin-actions"><button className="hot" onClick={() => confirm('Criar uma oferta na fila com o preço de hoje?') && act('ml-product-offer', { id: p.id }, 'Oferta criada na fila. Vá em "Na fila" para publicar.')}>Criar oferta</button><button onClick={() => setForm({ id: p.id, link: p.item_id, affiliate_url: p.affiliate_url, category: p.category, title: p.title, slug: p.slug || '' })}>Editar</button><button onClick={() => act('ml-product-toggle', { id: p.id })}>{p.active ? 'Pausar' : 'Ativar'}</button><button className="danger" onClick={() => confirm('Apagar este produto?') && act('ml-product-delete', { id: p.id })}>Apagar</button></div></div>)}</div>
+		{form ? <form className="admin-form" onSubmit={async e => { e.preventDefault(); const r = await act('ml-product-save', form); if (r) setForm(null); }}><h3>{form.id ? 'Editar produto' : 'Novo produto do Mercado Livre'}</h3>
+			<label>Link do anúncio ou código MLB<input value={form.link} onChange={e => setForm({ ...form, link: e.target.value })} placeholder="https://produto.mercadolivre.com.br/MLB-123456789-..." required /></label>
+			<label>Seu link de afiliado (gerado no painel do Mercado Livre)<input value={form.affiliate_url} onChange={e => setForm({ ...form, affiliate_url: e.target.value })} placeholder="https://meli.la/..." required /></label>
+			<div className="two"><label>Categoria<select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}>{categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}</select></label><label>Nome (opcional se a API estiver ligada)<input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} maxLength={140} /></label></div>
+			<label>Usar nos guias Top 7 (opcional)<select value={form.slug} onChange={e => setForm({ ...form, slug: e.target.value, category: e.target.value ? topCat(e.target.value) : form.category })}><option value="">Não usar</option>{allTopItems.map(i => <option key={i.slug} value={i.slug}>{i.name}</option>)}</select></label>
+			<div className="admin-actions"><button className="primary-button">Salvar</button><button type="button" onClick={() => setForm(null)}>Cancelar</button></div></form>
+			: <button className="primary-button" onClick={() => setForm(blank)}>+ Novo produto</button>}
 		{msg && <p className="form-msg">{msg}</p>}
 	</div>;
 }

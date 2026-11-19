@@ -1,7 +1,7 @@
 import { all, one, run, now, getText, getSetting } from './db.server';
 import { searchShopee, shopeeConfigured, type ShopeeProduct } from './shopee.server';
 import { getLiveItems } from './mercadolivre.server';
-import { products } from './products';
+import { watchList } from './products.server';
 import { categoryIds } from './categories';
 
 export type Source = { id: number; name: string; type: 'shopee' | 'ml_watch'; category: string; config: Record<string, any>; enabled: number };
@@ -20,7 +20,6 @@ function insertOffer(o: { title: string; price: number | null; old_price: number
 	run('INSERT INTO offers (title, price, old_price, store, category, url, image, external_id, score, status, source, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', o.title.slice(0, 140), o.price, o.old_price, o.store, o.category, o.url, o.image, o.external_id, o.score, status, o.source, now());
 	return status;
 }
-const mlCategory = (slug: string) => /^(nb|cel|tab|sw)-/.test(slug) ? 'eletronicos' : /^(tn|ra|rc|su)-/.test(slug) ? 'fitness' : /^(af|ro|co|cf)-/.test(slug) ? 'casa' : 'casa';
 
 type Preview = { title: string; price: number | null; discount: number; rating?: number; sales?: number; ok: boolean };
 
@@ -34,10 +33,10 @@ const toOffer = (p: ShopeeProduct, src: Source) => ({ title: p.title, price: p.p
 export async function testSource(src: Source): Promise<Preview[]> {
 	const f = loadFilters();
 	if (src.type === 'shopee') return (await shopeeItems(src)).slice(0, 8).map(p => ({ title: p.title, price: p.price, discount: p.discount, rating: p.rating, sales: p.sales, ok: passes(p, f) }));
-	const watch = products.filter(p => p.itemId);
-	if (!watch.length) throw new Error('Nenhum produto com itemId em produtos.json');
-	const live = await getLiveItems(watch.map(p => p.itemId!), { fresh: true });
-	return watch.slice(0, 8).map(p => { const l = live[p.itemId!]; return { title: l?.title || p.slug, price: l?.price ?? null, discount: 0, ok: !!l?.available }; });
+	const watch = watchList();
+	if (!watch.length) throw new Error('Nenhum produto cadastrado na aba Produtos ML');
+	const live = await getLiveItems(watch.map(p => p.itemId), { fresh: true });
+	return watch.slice(0, 8).map(p => { const l = live[p.itemId]; return { title: l?.title || p.slug, price: l?.price ?? null, discount: 0, ok: !!l?.available }; });
 }
 
 async function runSource(src: Source): Promise<{ novas: number; fila: number }> {
@@ -48,16 +47,16 @@ async function runSource(src: Source): Promise<{ novas: number; fila: number }> 
 		if (!src.config.keyword) throw new Error('Fonte sem palavra-chave');
 		for (const p of await shopeeItems(src)) if (passes(p, f)) count(insertOffer(toOffer(p, src)));
 	} else {
-		const watch = products.filter(p => p.itemId);
-		if (!watch.length) throw new Error('Nenhum produto com itemId em produtos.json');
-		const live = await getLiveItems(watch.map(p => p.itemId!), { fresh: true });
+		const watch = watchList();
+		if (!watch.length) throw new Error('Nenhum produto cadastrado na aba Produtos ML');
+		const live = await getLiveItems(watch.map(p => p.itemId), { fresh: true });
 		for (const p of watch) {
-			const l = live[p.itemId!];
+			const l = live[p.itemId];
 			if (!l || !l.available || l.price == null) continue;
 			const seen = one('SELECT last_price, min_price FROM price_watch WHERE item_id = ?', p.itemId);
 			if (seen && seen.last_price > l.price) {
 				const drop = (1 - l.price / seen.last_price) * 100;
-				if (drop >= f.min_discount) count(insertOffer({ title: l.title || p.title || p.slug, price: l.price, old_price: seen.last_price, store: 'Mercado Livre', category: mlCategory(p.slug), url: p.affiliateUrl, image: l.image, external_id: `ml:${p.itemId}:${Math.round(l.price)}`, score: scoreOf({ discount: drop, sales: 100, rating: 5 }), source: `ml:${src.id}` }));
+				if (drop >= f.min_discount) count(insertOffer({ title: l.title || p.title || p.slug, price: l.price, old_price: seen.last_price, store: 'Mercado Livre', category: p.category && categoryIds.includes(p.category) ? p.category : 'casa', url: p.affiliateUrl, image: l.image, external_id: `ml:${p.itemId}:${Math.round(l.price)}`, score: scoreOf({ discount: drop, sales: 100, rating: 5 }), source: `ml:${src.id}` }));
 			}
 			run('INSERT INTO price_watch (item_id, last_price, min_price, updated_at) VALUES (?, ?, ?, ?) ON CONFLICT(item_id) DO UPDATE SET last_price = excluded.last_price, min_price = MIN(min_price, excluded.min_price), updated_at = excluded.updated_at', p.itemId, l.price, l.price, now());
 		}

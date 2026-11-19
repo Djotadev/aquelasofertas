@@ -43,6 +43,10 @@ CREATE TABLE IF NOT EXISTS sources (
 	config TEXT NOT NULL DEFAULT '{}', enabled INTEGER NOT NULL DEFAULT 1,
 	last_run TEXT, last_status TEXT, last_count INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS ml_products (
+	id INTEGER PRIMARY KEY AUTOINCREMENT, item_id TEXT NOT NULL UNIQUE, slug TEXT UNIQUE, title TEXT NOT NULL, image TEXT,
+	affiliate_url TEXT NOT NULL, category TEXT NOT NULL, active INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS price_watch (item_id TEXT PRIMARY KEY, last_price REAL NOT NULL, min_price REAL NOT NULL, updated_at TEXT NOT NULL);
 `;
 

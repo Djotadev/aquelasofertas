@@ -4,7 +4,7 @@ import { PostGrid } from '@/components/home/post-grid';
 import { TopGuide, type TopLive } from '@/components/home/top-guide';
 import { posts, imageUrl } from '@/lib/posts';
 import { techCategories, techUpdated, fitnessCategories, fitnessUpdated, casaCategories, casaUpdated } from '@/lib/tops';
-import { productBySlug } from '@/lib/products';
+import { findProduct } from '@/lib/products.server';
 import { getLiveItems } from '@/lib/mercadolivre.server';
 const names:Record<string,string>={tecnologia:'Tecnologia',fitness:'Fitness',casa:'Casa'};
 const setFor=(category:string)=>category==='Tecnologia'?techCategories:category==='Fitness'?fitnessCategories:category==='Casa'?casaCategories:[];
@@ -12,7 +12,7 @@ export async function loader({params}:Route.LoaderArgs){
   const category=names[params.category||''];
   if(!category)throw new Response('Página não encontrada',{status:404});
   const live:TopLive={};
-  const registered=setFor(category).flatMap(c=>c.items).map(i=>({slug:i.slug,product:productBySlug(i.slug)})).filter((x):x is {slug:string;product:NonNullable<ReturnType<typeof productBySlug>>}=>!!x.product);
+  const registered=setFor(category).flatMap(c=>c.items).map(i=>({slug:i.slug,product:findProduct(i.slug)})).filter((x):x is {slug:string;product:NonNullable<ReturnType<typeof findProduct>>}=>!!x.product);
   if(registered.length){
     const ids=registered.map(x=>x.product.itemId).filter((id):id is string=>!!id);
     const items=ids.length?await getLiveItems(ids):{};

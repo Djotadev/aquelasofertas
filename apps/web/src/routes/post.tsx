@@ -3,20 +3,20 @@ import { Link } from 'react-router';
 import { ArrowUpRight, Clock3 } from 'lucide-react';
 import { seo } from '@/lib/seo';
 import { findPost, imageUrl, posts, disclosure } from '@/lib/posts';
-import { productBySlug } from '@/lib/products';
+import { findProduct } from '@/lib/products.server';
 import { getLiveItems } from '@/lib/mercadolivre.server';
 import { ProductCard, type ProductCardData } from '@/components/product-card';
 import { TopArticleList } from '@/components/top-article-list';
 import type { TopLive } from '@/components/home/top-guide';
 import { topCategoryById } from '@/lib/tops';
 export async function loader({params}:Route.LoaderArgs){const post=findPost(params.slug);if(!post)throw new Response('Artigo não encontrado',{status:404});
- const items=post.body.filter(b=>b.type==='product').map(b=>productBySlug(b.id)).filter((p):p is NonNullable<typeof p>=>!!p);
+ const items=post.body.filter(b=>b.type==='product').map(b=>findProduct(b.id)).filter((p):p is NonNullable<typeof p>=>!!p);
  const liveIds=items.map(p=>p.itemId).filter((id):id is string=>!!id);
  const live=liveIds.length?await getLiveItems(liveIds):{};
  const cards:ProductCardData[]=[];
  for(const p of items){const l=p.itemId?live[p.itemId]:null;if(l&&!l.available)continue;cards.push({slug:p.slug,title:l?.title||p.title||'Produto no Mercado Livre',image:l?.image||p.image||null,price:l?.price??null,originalPrice:l?.originalPrice??null});}
  const topLive:TopLive={};
- const topSlugs=post.body.filter(b=>b.type==='toplist').flatMap(b=>topCategoryById(b.id)?.items??[]).map(i=>({slug:i.slug,product:productBySlug(i.slug)})).filter((x):x is {slug:string;product:NonNullable<ReturnType<typeof productBySlug>>}=>!!x.product);
+ const topSlugs=post.body.filter(b=>b.type==='toplist').flatMap(b=>topCategoryById(b.id)?.items??[]).map(i=>({slug:i.slug,product:findProduct(i.slug)})).filter((x):x is {slug:string;product:NonNullable<ReturnType<typeof findProduct>>}=>!!x.product);
  const topIds=topSlugs.map(x=>x.product.itemId).filter((id):id is string=>!!id);
  if(topSlugs.length){const found=topIds.length?await getLiveItems(topIds):{};for(const {slug,product} of topSlugs){const l=product.itemId?found[product.itemId]:null;if(l&&!l.available)continue;topLive[slug]={registered:true,price:l?.price??null,originalPrice:l?.originalPrice??null,image:l?.image??null};}}
  return {post,cards,topLive};}

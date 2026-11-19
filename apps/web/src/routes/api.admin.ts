@@ -3,6 +3,8 @@ import { all, one, run, now, getSetting, setSetting, getText } from '@/lib/db.se
 import { parseSource, testSource, collectAll, loadFilters, validCategory } from '@/lib/collector.server';
 import { loadAuto, publishRound } from '@/lib/scheduler.server';
 import { shopeeConfigured } from '@/lib/shopee.server';
+import { parseItemId, isMlUrl } from '@/lib/products.server';
+import { getLiveItems } from '@/lib/mercadolivre.server';
 import { login, logout, getAdmin, isSecure, sessionCookie, clearCookie, sameOrigin, listAdmins } from '@/lib/auth.server';
 import { hashPassword } from '@/lib/crypto.server';
 import { allow, clientIp } from '@/lib/limits.server';
@@ -50,6 +52,11 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 			return json({ offers: all('SELECT * FROM offers WHERE status = ? ORDER BY id DESC LIMIT 200', status) });
 		}
 		case 'admins': return json({ admins: listAdmins() });
+		case 'ml-products': {
+			const rows = all('SELECT * FROM ml_products ORDER BY id DESC');
+			const live = rows.length ? await getLiveItems(rows.map(r => r.item_id)) : {};
+			return json({ creds: !!(process.env.ML_CLIENT_ID && process.env.ML_CLIENT_SECRET), products: rows.map(r => ({ ...r, live: live[r.item_id] ? { price: live[r.item_id]!.price, available: live[r.item_id]!.available, image: live[r.item_id]!.image } : null })) });
+		}
 		case 'sources': return json({ sources: all('SELECT * FROM sources ORDER BY id').map(parseSource), credenciais: { shopee: shopeeConfigured(), ml: !!(process.env.ML_CLIENT_ID && process.env.ML_CLIENT_SECRET) } });
 		case 'automation': {
 			let last = null; try { last = JSON.parse(getText('last_run_info', 'null')); } catch { /* vazio */ }
@@ -110,6 +117,40 @@ export async function action({ request, params }: Route.ActionArgs) {
 			if (Number(b.id)) run('UPDATE sources SET name = ?, type = ?, category = ?, config = ? WHERE id = ?', name, b.type, b.category, config, Number(b.id));
 			else run('INSERT INTO sources (name, type, category, config, created_at) VALUES (?, ?, ?, ?, ?)', name, b.type, b.category, config, now());
 			return json({ ok: true });
+		}
+		case 'ml-product-save': {
+			const itemId = parseItemId(b.link);
+			if (!itemId) return json({ error: 'Cole o link do anúncio ou o código MLB (ex.: MLB1234567890).' }, 400);
+			const affiliate = String(b.affiliate_url || '').trim();
+			if (!isMlUrl(affiliate)) return json({ error: 'O link de afiliado precisa ser do Mercado Livre (meli.la ou mercadolivre.com.br) e começar com https://' }, 400);
+			if (!validCategory(b.category)) return json({ error: 'Escolha uma categoria.' }, 400);
+			const slug = String(b.slug || '').trim().toLowerCase() || null;
+			if (slug && !/^[a-z0-9-]{3,40}$/.test(slug)) return json({ error: 'O código do Top 7 só pode ter letras minúsculas, números e hífen.' }, 400);
+			const id = Number(b.id) || 0;
+			if (one('SELECT id FROM ml_products WHERE item_id = ? AND id != ?', itemId, id)) return json({ error: 'Esse anúncio já está cadastrado.' }, 400);
+			if (slug && one('SELECT id FROM ml_products WHERE slug = ? AND id != ?', slug, id)) return json({ error: 'Esse código do Top 7 já está em uso por outro produto.' }, 400);
+			let title = String(b.title || '').trim().slice(0, 140), image: string | null = null, note = '';
+			if (process.env.ML_CLIENT_ID && process.env.ML_CLIENT_SECRET) {
+				const live = (await getLiveItems([itemId], { fresh: true }))[itemId];
+				if (!live) return json({ error: 'Não encontrei esse anúncio na API do Mercado Livre. Confira o código MLB.' }, 400);
+				if (!live.available) return json({ error: 'Esse anúncio está inativo ou não é novo, e o programa só aceita produtos novos.' }, 400);
+				title = title || live.title; image = live.image;
+				if (live.price != null) run('INSERT OR IGNORE INTO price_watch (item_id, last_price, min_price, updated_at) VALUES (?, ?, ?, ?)', itemId, live.price, live.price, now());
+				note = live.price != null ? ` Preço atual: R$ ${live.price.toFixed(2).replace('.', ',')}.` : '';
+			} else if (title.length < 3) return json({ error: 'Sem as credenciais do Mercado Livre, informe também o nome do produto.' }, 400);
+			if (id) run('UPDATE ml_products SET item_id = ?, slug = ?, title = ?, image = COALESCE(?, image), affiliate_url = ?, category = ? WHERE id = ?', itemId, slug, title, image, affiliate, b.category, id);
+			else run('INSERT INTO ml_products (item_id, slug, title, image, affiliate_url, category, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)', itemId, slug, title, image, affiliate, b.category, now());
+			return json({ ok: true, message: `Produto salvo: ${title}.${note}` });
+		}
+		case 'ml-product-delete': run('DELETE FROM ml_products WHERE id = ?', Number(b.id)); return json({ ok: true });
+		case 'ml-product-toggle': run('UPDATE ml_products SET active = 1 - active WHERE id = ?', Number(b.id)); return json({ ok: true });
+		case 'ml-product-offer': {
+			const p = one('SELECT * FROM ml_products WHERE id = ?', Number(b.id));
+			if (!p) return json({ error: 'Produto não encontrado' }, 404);
+			let price: number | null = null, oldPrice: number | null = null, image: string | null = p.image, title: string = p.title;
+			try { const live = (await getLiveItems([p.item_id], { fresh: true }))[p.item_id]; if (live) { if (!live.available) return json({ error: 'O anúncio não está mais ativo ou novo.' }, 400); price = live.price; oldPrice = live.originalPrice; image = live.image || image; title = live.title || title; } } catch { /* usa os dados salvos */ }
+			const r = run("INSERT INTO offers (title, price, old_price, store, category, url, image, external_id, status, source, created_at) VALUES (?, ?, ?, 'Mercado Livre', ?, ?, ?, ?, 'fila', 'ml:manual', ?)", title.slice(0, 140), price, oldPrice && price && oldPrice > price ? oldPrice : null, p.category, p.affiliate_url, image, `ml:${p.item_id}:manual:${Date.now()}`, now());
+			return json({ ok: true, id: Number(r.lastInsertRowid) });
 		}
 		case 'source-delete': run('DELETE FROM sources WHERE id = ?', Number(b.id)); return json({ ok: true });
 		case 'source-toggle': run('UPDATE sources SET enabled = 1 - enabled WHERE id = ?', Number(b.id)); return json({ ok: true });
